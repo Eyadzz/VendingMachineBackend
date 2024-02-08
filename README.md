@@ -28,7 +28,7 @@ The project leverages several essential packages and libraries, including Mediat
    - JSON Web Token (JWT) Bearer Authentication is used to secure API endpoints. It verifies the identity of users by validating JWT tokens, allowing access to protected resources.
 
 4. **Entity Framework Core (EF Core)**:
-   - EF Core is a lightweight and extensible Object-Relational Mapping (ORM) framework that is used to interact with the SQL Server database. It simplifies data access and database operations.
+   - EF Core is a lightweight and extensible Object-Relational Mapping (ORM) framework that is used to interact with the Postgres database. It simplifies data access and database operations.
 
 5. **Serilog**:
    - Serilog is a structured logging library for .NET. It is used for logging events, errors, and debugging information in the application. Serilog can be configured to store logs in various sinks like text files, databases, or cloud services.
@@ -44,10 +44,12 @@ The project leverages several essential packages and libraries, including Mediat
 
 ## Endpoints
 
-![image](https://github.com/Eyadzz/VendingMachineBackend/assets/66397595/2e66091d-c497-4fbb-97df-5af96582c193)
+![image](https://github.com/Eyadzz/VendingMachineBackend/assets/66397595/52853b33-e15f-4612-89d0-14fbdce8be83)
+
 
 ## Running the Application
 
 - You can use the provided docker-compose file to run the whole stack on docker in case you don't have the necessary tools to run on your machine using "docker compose up -d --build"
+- In case you do not want to use Docker, You need VS, .NET 8 SDK, Postgres and Redis installed on your machine.
 - You can then start using the backend from Swagger page "http://localhost:5099/swagger/index.html"
 - There are pre-instered rows in the database to help with testing which includes (2 Users with different roles, 2 Roles, 3 Products) and the default login for the users are (username: seller or buyer, password:$String1)
