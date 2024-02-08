@@ -1,6 +1,23 @@
-﻿namespace Application.Features.VendingMachine.Commands;
+﻿using System.ComponentModel.DataAnnotations;
 
-public record UpdateProduct(int Id, string Name, float Price, int QuantityToBeAdded) : IRequest<BaseResponse>;
+namespace Application.Features.VendingMachine.Commands;
+
+public record UpdateProduct : IRequest<BaseResponse>
+{
+    [Required(ErrorMessage = "Id is required")]
+    public int Id { get; set; }
+    
+    [Required(ErrorMessage = "Name is required")]
+    public required string Name { get; set; }
+    
+    [Required(ErrorMessage = "Price is required")]
+    [Range(0, float.MaxValue, ErrorMessage = "Price must be greater than 0")]
+    public float Price { get; set; }
+    
+    [Required(ErrorMessage = "Quantity is required")]
+    [Range(0, int.MaxValue, ErrorMessage = "Quantity must be greater than 0")]
+    public int QuantityToBeAdded { get; set; }
+}
 
 public class UpdateProductHandler : IRequestHandler<UpdateProduct, BaseResponse>
 {

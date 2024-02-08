@@ -1,8 +1,17 @@
-﻿using System.Net;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace Application.Features.VendingMachine.Commands;
 
-public record BuyProduct(int Id, int Amount) : IRequest<BaseResponse>;
+public record BuyProduct : IRequest<BaseResponse>
+{
+    [Required(ErrorMessage = "Id is required")]
+    public int Id { get; set; }
+    
+    [Required(ErrorMessage = "Amount is required")]
+    [Range(1, int.MaxValue, ErrorMessage = "Amount must be greater than 0")]
+    public int Amount { get; set; }
+}
 
 public class BuyProductHandler : IRequestHandler<BuyProduct, BaseResponse>
 {
