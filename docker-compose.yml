@@ -1,0 +1,48 @@
+﻿version: "3.9"
+services:
+  backend:
+    image: vending_machine_backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: VendingMachine
+    ports:
+      - "5099:8080"
+    environment:
+      - POSTGRES_CONNECTION_STRING=Server=postgres;Port=5432;User Id=postgres;Password=postgres;Database=VendingMachine;
+      - REDIS_CONNECTION_STRING=redisStack:6379
+      - JWT_SECRET_KEY=MK75iPxAo4XNUZXYyE8nomhiDTmiz5ON
+    volumes:
+      - logs:/app/logs
+    depends_on:
+      - "postgres"
+      - "redisStack"
+    links:
+      - "postgres"
+      - "redisStack"
+      
+  postgres:
+    image: postgres:16.1-alpine3.19
+    container_name: Postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: VendingMachine
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  redisStack:
+    container_name: Redis
+    image: redis/redis-stack
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - redis:/data/redis
+        
+        
+volumes:
+    postgres:
+    redis:
+    logs:
